@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { addToDo } from "../store";
 
-function Home({ toDos }) {
+function Home({ toDos, dispatchAddToDo }) {
   const [text, setText] = useState("");
   function onChange(e) {
     setText(e.target.value);
@@ -9,6 +10,7 @@ function Home({ toDos }) {
   function onSubmit(e) {
     e.preventDefault();
     setText("");
+    dispatchAddToDo(text);
   }
   return (
     <>
@@ -17,7 +19,7 @@ function Home({ toDos }) {
         <input type="text" value={text} onChange={onChange} />
         <button>추가</button>
       </form>
-      <ul></ul>
+      <ul>{JSON.stringify(toDos)}</ul>
     </>
   );
 }
@@ -26,4 +28,10 @@ function mapStateToProps(state) {
   return { toDos: state };
 }
 
-export default connect(mapStateToProps)(Home);
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatchAddToDo: (text) => dispatch(addToDo(text))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
