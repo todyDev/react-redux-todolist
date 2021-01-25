@@ -1,11 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
+import { deleteToDo } from "../store";
 
-function Todo({ text }) {
+function Todo({ text, onBtnClick }) {
   return (
     <li>
-      {text} <button>Del</button>
+      {text} <button onClick={onBtnClick}>Del</button>
     </li>
   );
 }
 
-export default Todo;
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    onBtnClick: () => dispatch(deleteToDo(ownProps.id))
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Todo);
