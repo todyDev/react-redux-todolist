@@ -4,11 +4,11 @@ const ADD_TODO = "ADD_TODO";
 const DEL_TODO = "DEL_TODO";
 
 // action router
-export const addToDo = (text) => {
+const addToDo = (text) => {
   return { type: ADD_TODO, id: Date.now(), text };
 };
 
-export const deleteToDo = (id) => {
+const deleteToDo = (id) => {
   return { type: DEL_TODO, id };
 };
 
@@ -28,5 +28,11 @@ const reducer = (state = [], action) => {
 
 // store
 const store = createStore(reducer);
+
+// action Creator
+export const actionCreators = {
+  addToDo,
+  deleteToDo
+};
 
 export default store;
