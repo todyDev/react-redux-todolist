@@ -29,7 +29,10 @@ function mapDispatchToProps(dispatch, ownProps) {
     }
   } = ownProps;
   return {
-    onBtnClick: () => dispatch(deleteToDo(parseInt(id)))
+    onBtnClick: () => {
+      dispatch(deleteToDo(parseInt(id)));
+      ownProps.history.push("/");
+    }
   };
 }
 
